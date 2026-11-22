@@ -6,7 +6,26 @@
 <title>HIS MEMORY — DATA SHIFT</title>
 <meta name="description" content="Two memories the old man left behind, for the one who finished the rite.">
 <meta name="theme-color" content="#12223A">
-<link rel="icon" href="data:,">
+
+<!-- 分享卡：og:image 必须是**绝对地址**，抓取方不解析相对路径。
+     卡片由 og.png（1200×630）提供，改了它记得同步改这里的 ?v= 版本号。 -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://he-r.cn/">
+<meta property="og:site_name" content="DATA SHIFT">
+<meta property="og:title" content="HIS MEMORY — DATA SHIFT">
+<meta property="og:description" content="Two memories the old man left behind, for the one who finished the rite.">
+<meta property="og:image" content="https://he-r.cn/og.png?v=1">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="HIS MEMORY — two memories of a code, with the finished code beside them.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HIS MEMORY — DATA SHIFT">
+<meta name="twitter:description" content="Two memories the old man left behind, for the one who finished the rite.">
+<meta name="twitter:image" content="https://he-r.cn/og.png?v=1">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://he-r.cn/">
 <style>
   :root {
     --bg: #12223A;
@@ -220,6 +239,20 @@
     text-align: center;
   }
 
+  /* 视觉隐藏、但留在无障碍树里：canvas 只有动画，读屏用户拿不到「结果」 */
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
   @media (max-width: 360px) {
     .wrap { padding: 30px 16px 44px; }
     .memory { margin-top: 38px; }
@@ -242,6 +275,7 @@
       <canvas width="360" height="360" role="img" aria-label="Memory one: the old man paints the frame of his code."></canvas>
       <div class="prog"><i></i></div>
     </div>
+    <p class="sr">Memory one, the frame: he paints the three corner squares and the timing lines that every code carries. The frame is everyone's.</p>
     <div class="actions"><button class="replay" type="button" hidden>Replay</button></div>
   </section>
 
@@ -252,12 +286,13 @@
       <canvas width="360" height="360" role="img" aria-label="Memory two: the old man fills the data of his code."></canvas>
       <div class="prog"><i></i></div>
     </div>
+    <p class="sr">Memory two, the words: he fills in the data area. The finished code reads: HE REMEMBERS YOU.</p>
     <div class="actions"><button class="replay" type="button" hidden>Replay</button></div>
   </section>
 
   <footer>
     <div class="endline">Take it back to him.</div>
-    <p class="endsub">Go back. He is waiting.</p>
+    <p class="endsub">Start again. He is waiting.</p>
     <p class="stamp">he-r.cn &middot; You were here.</p>
   </footer>
 </div>
@@ -395,6 +430,7 @@
       return;
     }
     draw(m);
+    ensureLoop();
   }
 
   function showButton(m) {
@@ -630,15 +666,28 @@
 
   /* ===== 时间推进 ===== */
   var last = 0;
+  var rafId = 0;
+
+  /* 只在有东西在播的时候排帧。原来这里无条件 requestAnimationFrame，
+     两段都播完之后还在以 60fps 空转 —— 手机上是纯耗电。 */
+  function ensureLoop() {
+    if (rafId) return;
+    last = 0;                        // 停转期间的时间差不能混进第一帧
+    rafId = window.requestAnimationFrame(tick);
+  }
 
   function tick(now) {
+    rafId = 0;
     if (!last) last = now;
     var dt = Math.min(50, now - last);
     last = now;
 
+    var any = false;
+
     for (var i = 0; i < memories.length; i++) {
       var m = memories[i];
       if (!m.playing) continue;
+      any = true;
 
       m.elapsed += dt;
 
@@ -686,7 +735,7 @@
       draw(m);
     }
 
-    window.requestAnimationFrame(tick);
+    if (any) rafId = window.requestAnimationFrame(tick);
   }
 
   /* ===== 进入视口才开始（两段不会同时播）===== */
@@ -717,7 +766,7 @@
     }, 120);
   });
 
-  window.requestAnimationFrame(tick);
+  /* 这里不再无条件起循环：tick 由 play() → ensureLoop() 拉起，播完自己停。 */
 })();
 </script>
 </body>
