@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HIS MEMORY — DATA SHIFT</title>
-<meta name="description" content="Two memories the old man left behind, for the one who finished the rite.">
+<meta name="description" content="Two half-memories the old man left behind, for the one who finished the rite.">
 <meta name="theme-color" content="#12223A">
 
 <!-- 分享卡：og:image 必须是**绝对地址**，抓取方不解析相对路径。
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://he-r.cn/">
 <meta property="og:site_name" content="DATA SHIFT">
 <meta property="og:title" content="HIS MEMORY — DATA SHIFT">
-<meta property="og:description" content="Two memories the old man left behind, for the one who finished the rite.">
+<meta property="og:description" content="Two half-memories the old man left behind, for the one who finished the rite.">
 <meta property="og:image" content="https://he-r.cn/og.png?v=1">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="HIS MEMORY — two memories of a code, with the finished code beside them.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HIS MEMORY — DATA SHIFT">
-<meta name="twitter:description" content="Two memories the old man left behind, for the one who finished the rite.">
+<meta name="twitter:description" content="Two half-memories the old man left behind, for the one who finished the rite.">
 <meta name="twitter:image" content="https://he-r.cn/og.png?v=1">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -265,34 +265,34 @@
     <div class="eyebrow">DATA SHIFT &middot; An Epilogue</div>
     <h1>HIS MEMORY</h1>
     <p class="lede">He could not keep his own data.<br>So he left it here, for you.</p>
-    <p class="hint">Two memories. Watch them in order.</p>
+    <p class="hint">Two memories. Neither is whole.</p>
   </header>
 
   <section class="memory" data-memory="1">
-    <div class="label"><span class="num">I</span> The Frame</div>
-    <p class="caption">He knew the order. Corners first, then the lines.<br>The frame is everyone's.</p>
+    <div class="label"><span class="num">I</span> The Left of It</div>
+    <p class="caption">He remembered the left of it.<br>Everything up to the middle.</p>
     <div class="board">
-      <canvas width="360" height="360" role="img" aria-label="Memory one: the old man paints the frame of his code."></canvas>
+      <canvas width="360" height="360" role="img" aria-label="Memory one: the old man paints the left half of his code, with a band down the middle."></canvas>
       <div class="prog"><i></i></div>
     </div>
-    <p class="sr">Memory one, the frame: he paints the three corner squares and the timing lines that every code carries. The frame is everyone's.</p>
+    <p class="sr">Memory one, the left of it: the left half of the code, including the band down the middle. It is not the whole code.</p>
     <div class="actions"><button class="replay" type="button" hidden>Replay</button></div>
   </section>
 
   <section class="memory" data-memory="2">
-    <div class="label"><span class="num">II</span> The Words</div>
-    <p class="caption">The frame was already his.<br>The words are what he could not keep.</p>
+    <div class="label"><span class="num">II</span> The Right of It</div>
+    <p class="caption">He remembered the right of it.<br>The middle again — the rest, never.</p>
     <div class="board">
-      <canvas width="360" height="360" role="img" aria-label="Memory two: the old man fills the data of his code."></canvas>
+      <canvas width="360" height="360" role="img" aria-label="Memory two: the old man paints the right half of his code, with the middle band repeated."></canvas>
       <div class="prog"><i></i></div>
     </div>
-    <p class="sr">Memory two, the words: he fills in the data area. The finished code reads: HE REMEMBERS YOU.</p>
+    <p class="sr">Memory two, the right of it: the right half, with the middle band again. Neither memory is complete; together they read: HE REMEMBERS YOU.</p>
     <div class="actions"><button class="replay" type="button" hidden>Replay</button></div>
   </section>
 
   <footer>
     <div class="endline">Take it back to him.</div>
-    <p class="endsub">Start again. He is waiting.</p>
+    <p class="endsub">Put them together. He is waiting.</p>
     <p class="stamp">he-r.cn &middot; You were here.</p>
   </footer>
 </div>
@@ -306,12 +306,15 @@
   'use strict';
 
   /* ===== 老者码（HE REMEMBERS YOU，v1 / 纠错 L / 21×21）=====
-     数据由 segno 离线生成：
-       · SKEL = 骨架黑格 124 个，按「BL 定位 + 暗模块 → TL → TR → 定时 → 格式信息」顺序
-       · DATA = 数据区黑格 106 个，按 QR 码字之字形顺序（从右下角开始）
-     两组合起来 = 230 个黑格 = 整张码。 */
-  var SKEL = parseCells('14,0 14,1 14,2 14,3 14,4 14,5 14,6 15,0 15,6 16,0 16,2 16,3 16,4 16,6 17,0 17,2 17,3 17,4 17,6 18,0 18,2 18,3 18,4 18,6 19,0 19,6 20,0 20,1 20,2 20,3 20,4 20,5 20,6 13,8 0,0 0,1 0,2 0,3 0,4 0,5 0,6 1,0 1,6 2,0 2,2 2,3 2,4 2,6 3,0 3,2 3,3 3,4 3,6 4,0 4,2 4,3 4,4 4,6 5,0 5,6 6,0 6,1 6,2 6,3 6,4 6,5 6,6 0,14 0,15 0,16 0,17 0,18 0,19 0,20 1,14 1,20 2,14 2,16 2,17 2,18 2,20 3,14 3,16 3,17 3,18 3,20 4,14 4,16 4,17 4,18 4,20 5,14 5,20 6,14 6,15 6,16 6,17 6,18 6,19 6,20 6,8 6,10 6,12 8,6 10,6 12,6 8,0 8,1 8,4 8,5 5,8 3,8 2,8 1,8 0,8 8,20 8,19 8,18 8,17 8,15 20,8 19,8 16,8 15,8');
-  var DATA = parseCells('20,20 20,19 19,20 17,20 17,19 16,19 12,20 12,19 10,20 9,17 10,17 11,18 12,18 12,17 13,17 14,18 14,17 15,18 15,17 17,18 18,18 19,17 20,18 20,17 20,15 19,16 19,15 18,16 17,16 15,16 13,16 13,15 12,16 12,15 11,16 10,15 9,15 9,13 10,14 10,13 11,13 13,13 14,13 15,14 15,13 16,14 17,13 18,14 20,13 19,12 18,11 17,12 16,12 15,11 14,11 13,12 12,11 11,12 11,11 10,12 9,12 8,12 5,12 4,12 4,11 3,12 2,12 2,11 1,11 0,12 1,9 2,10 2,9 3,10 4,10 4,9 5,10 9,10 10,10 10,9 11,10 12,10 12,9 13,10 14,9 15,9 17,10 18,10 19,9 20,9 12,7 11,8 9,7 9,5 11,5 11,4 12,4 12,3 12,2 10,3 10,2 9,3 10,1 11,1 12,1 12,0');
+     两段记忆是**同一张码的两个碎片**（2026-11-25 作者定）：
+       · MEM_A = 左半边（第 0~12 列）的 143 个黑格
+       · MEM_B = 右半边（第 8~20 列）的 142 个黑格
+     两段有**重叠**（第 8~12 列，55 格），也各有独有格（88 / 87 格）；
+     合起来才是整张码的 230 个黑格 —— 单看任何一段都不完整，这就是「拼凑」。
+     每段内部：先按骨架顺序（BL + 暗模块 → TL → TR → 定时 → 格式）写结构，
+     再按 QR 码字之字形顺序（从右下角开始）写数据区。 */
+  var MEM_A = parseCells('14,0 14,1 14,2 14,3 14,4 14,5 14,6 15,0 15,6 16,0 16,2 16,3 16,4 16,6 17,0 17,2 17,3 17,4 17,6 18,0 18,2 18,3 18,4 18,6 19,0 19,6 20,0 20,1 20,2 20,3 20,4 20,5 20,6 13,8 0,0 0,1 0,2 0,3 0,4 0,5 0,6 1,0 1,6 2,0 2,2 2,3 2,4 2,6 3,0 3,2 3,3 3,4 3,6 4,0 4,2 4,3 4,4 4,6 5,0 5,6 6,0 6,1 6,2 6,3 6,4 6,5 6,6 6,8 6,10 6,12 8,6 10,6 12,6 8,0 8,1 8,4 8,5 5,8 3,8 2,8 1,8 0,8 20,8 19,8 16,8 15,8 19,12 18,11 17,12 16,12 15,11 14,11 13,12 12,11 11,12 11,11 10,12 9,12 8,12 5,12 4,12 4,11 3,12 2,12 2,11 1,11 0,12 1,9 2,10 2,9 3,10 4,10 4,9 5,10 9,10 10,10 10,9 11,10 12,10 12,9 13,10 14,9 15,9 17,10 18,10 19,9 20,9 12,7 11,8 9,7 9,5 11,5 11,4 12,4 12,3 12,2 10,3 10,2 9,3 10,1 11,1 12,1 12,0');
+  var MEM_B = parseCells('13,8 0,14 0,15 0,16 0,17 0,18 0,19 0,20 1,14 1,20 2,14 2,16 2,17 2,18 2,20 3,14 3,16 3,17 3,18 3,20 4,14 4,16 4,17 4,18 4,20 5,14 5,20 6,14 6,15 6,16 6,17 6,18 6,19 6,20 6,8 6,10 6,12 5,8 3,8 2,8 1,8 0,8 8,20 8,19 8,18 8,17 8,15 20,8 19,8 16,8 15,8 20,20 20,19 19,20 17,20 17,19 16,19 12,20 12,19 10,20 9,17 10,17 11,18 12,18 12,17 13,17 14,18 14,17 15,18 15,17 17,18 18,18 19,17 20,18 20,17 20,15 19,16 19,15 18,16 17,16 15,16 13,16 13,15 12,16 12,15 11,16 10,15 9,15 9,13 10,14 10,13 11,13 13,13 14,13 15,14 15,13 16,14 17,13 18,14 20,13 19,12 18,11 17,12 16,12 15,11 14,11 13,12 12,11 11,12 11,11 10,12 9,12 8,12 5,12 4,12 4,11 3,12 2,12 2,11 1,11 0,12 1,9 2,10 2,9 3,10 4,10 4,9 5,10 9,10 10,10 10,9 11,10 12,10 12,9 13,10 14,9 15,9 17,10 18,10 19,9 20,9 11,8');
 
   var N = 21;        // 21×21
   var QUIET = 4;     // 静区 4 格：手机能扫
@@ -655,12 +658,13 @@
   var memories = [];
   var sections = document.querySelectorAll('.memory');
   if (sections.length >= 2) {
-    memories.push(createMemory(sections[0], SKEL, null, {
-      step: 62,
-      pauses: { 33: 280, 66: 280, 99: 280, 105: 280 }
+    memories.push(createMemory(sections[0], MEM_A, null, {
+      step: 58,
+      pauses: { 86: 300 }
     }));
-    memories.push(createMemory(sections[1], DATA, SKEL, {
-      step: 88
+    memories.push(createMemory(sections[1], MEM_B, null, {
+      step: 64,
+      pauses: { 51: 300 }
     }));
   }
 
